@@ -1,0 +1,56 @@
+<PongBall>:
+    size: dp(50), dp(50)
+    canvas:
+        Ellipse:
+            pos: self.pos
+            size: self.size
+<PongPaddle>:
+    size: dp(25), dp(200)
+    canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<PongGame>:
+    ball: pong_ball
+    player1: player_left
+    player2: player_right
+    canvas.before:
+        Color:
+            rgb: 0,0,1
+        Rectangle:
+            size: self.size
+            source: 'Images/myGrid.png'
+    canvas:
+        Color:
+            rgb: 1,0,0
+        Rectangle:
+            pos: self.width/2 - dp(5), 0
+            size: dp(10), self.height
+    Label:
+        color : 0,1,0
+        font_size: 60
+        font_name:'bhai/Lcd.ttf'
+        center_x:root.width / 4
+        top: root.top - dp(50)
+        text:str(root.player1.score)
+
+    Label:
+        color : 0,1,0
+        font_size: 60
+        font_name:'bhai/Lcd.ttf'
+        center_x:root.width* 3/4
+        top: root.top - dp(50)
+        text: str(root.player2.score)
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+
+    PongPaddle:
+        id: player_left
+        x: root.x
+        center_y: root.center_y
+    PongPaddle:
+        id: player_right
+        x: root.width - self.width
+        center_y: root.center_y
